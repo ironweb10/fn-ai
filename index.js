@@ -19,8 +19,7 @@ const accounts = [
     {
         accountId: 'fccea2eb2be346cb9ce4518dd4d2faf2',
         deviceId: '06b4b296bca946fdb585cc6740c5d063',
-        
-  secret: '6YZPAZOB4M4NKDUVLENP4VAWQTQ2GBST'
+        secret: '6YZPAZOB4M4NKDUVLENP4VAWQTQ2GBST'
     }
 ];
 
@@ -57,14 +56,20 @@ app.listen(3000, () => console.log("web started"));
 
                 if (command === 'ai' && query) {
                     try {
-                        const apiUrl = `https://tilki.dev/api/hercai?soru=${encodeURIComponent(content)}`;
+                        const apiUrl = `https://api.popcat.xyz/chatbot?msg=${encodeURIComponent(content)}`;
                         const response = await axios.get(apiUrl);
-                        console.log('API Response:', response.data);
-                        const apiResponse = response.data && response.data.cevap;
-                        console.log('Extracted API Response:', apiResponse);
-                        message.reply(apiResponse || 'API response is empty or undefined.');
+
+                        // Check if the response has the expected structure
+                        if (response.data && response.data.response) {
+                            const apiResponse = response.data.response;
+                            console.log('API Response:', apiResponse);
+                            message.reply(apiResponse || 'API response is empty or undefined.');
+                        } else {
+                            console.error('Unexpected API response structure:', response.data);
+                            message.reply('Unexpected API response structure. Please try again later.');
+                        }
                     } catch (apiError) {
-                        console.log('API Error:', apiError);
+                        console.error('API Error:', apiError);
                         message.reply('Failed to fetch response from the API.');
                     }
                 }
