@@ -91,7 +91,7 @@ app.listen(3000, () => console.log("web started"));
                 client.party.chat.send('Discord server: dsc.gg/iron-web10\n  bot created by: iron web10');
                 if (party.size === 1) {
                     try {
-                        client.setStatus("Free Vbucks, invite", "online");
+                        client.setStatus("Free Chat-GPT 4, invite", "online");
                     } catch (owen) {
                         console.log(`Error: ${owen}`);
                     }
