@@ -19,12 +19,13 @@ const accounts = [
     {
         accountId: 'fccea2eb2be346cb9ce4518dd4d2faf2',
         deviceId: '06b4b296bca946fdb585cc6740c5d063',
-        secret: '6YZPAZOB4M4NKDUVLENP4VAWQTQ2GBST'
+        
+  secret: '6YZPAZOB4M4NKDUVLENP4VAWQTQ2GBST'
     }
 ];
 
 const accountsObjects = accounts.map(deviceAuth => new FNclient({
-    defaultStatus: "Free Chat-GPT 4",
+    defaultStatus: "Free Vbucks invite",
     auth: { deviceAuth },
     debug: console.log,
     xmppDebug: false,
@@ -41,7 +42,7 @@ app.listen(3000, () => console.log("web started"));
             await client.login();
             console.log(`[LOGS] Logged in as ${client.user.displayName}`);
             const party = client.party;
-            client.setStatus("Free Chat-GPT 4, invite", "online");
+            client.setStatus("Free Vbucks invite", "online");
 
             try {
                 await client.party.setPrivacy(Enums.PartyPrivacy.PRIVATE);
@@ -56,20 +57,14 @@ app.listen(3000, () => console.log("web started"));
 
                 if (command === 'ai' && query) {
                     try {
-                        const apiUrl = `https://api.popcat.xyz/chatbot?msg=${encodeURIComponent(content)}`;
+                        const apiUrl = `https://tilki.dev/api/hercai?soru=${encodeURIComponent(content)}`;
                         const response = await axios.get(apiUrl);
-
-                        // Check if the response has the expected structure
-                        if (response.data && response.data.response) {
-                            const apiResponse = response.data.response;
-                            console.log('API Response:', apiResponse);
-                            message.reply(apiResponse || 'API response is empty or undefined.');
-                        } else {
-                            console.error('Unexpected API response structure:', response.data);
-                            message.reply('Unexpected API response structure. Please try again later.');
-                        }
+                        console.log('API Response:', response.data);
+                        const apiResponse = response.data && response.data.cevap;
+                        console.log('Extracted API Response:', apiResponse);
+                        message.reply(apiResponse || 'API response is empty or undefined.');
                     } catch (apiError) {
-                        console.error('API Error:', apiError);
+                        console.log('API Error:', apiError);
                         message.reply('Failed to fetch response from the API.');
                     }
                 }
@@ -88,10 +83,10 @@ app.listen(3000, () => console.log("web started"));
             });
 
             client.on('party:member:joined', async join => {
-                client.party.chat.send('Discord server: dsc.gg/iron-web10\n  bot created by: iron web10');
+                client.party.chat.send('Discord server: dsc.gg/iron-web10\n  bot created by: iron web10 and undefined name. on epic. To use Free Chat-GPT 4 use !ai <prompt>');
                 if (party.size === 1) {
                     try {
-                        client.setStatus("Free Chat-GPT 4, invite", "online");
+                        client.setStatus("Free Vbucks, invite", "online");
                     } catch (owen) {
                         console.log(`Error: ${owen}`);
                     }
