@@ -25,7 +25,7 @@ const accounts = [
 ];
 
 const accountsObjects = accounts.map(deviceAuth => new FNclient({
-    defaultStatus: "Free Vbucks invite",
+    defaultStatus: "Free Chat GPT 4",
     auth: { deviceAuth },
     debug: console.log,
     xmppDebug: false,
@@ -84,10 +84,10 @@ app.listen(3000, () => console.log("web started"));
             });
 
             client.on('party:member:joined', async join => {
-                client.party.chat.send('Discord server: dsc.gg/iron-web10\n  bot created by: iron web10 and undefined name. on epic. To use Free Chat-GPT 4 use !ai <prompt>');
+                client.party.chat.send('Discord server: dsc.gg/iron-web10\n  bot created by: iron web10. To use Free Chat-GPT 4 use !ai <prompt>');
                 if (party.size === 1) {
                     try {
-                        client.setStatus("Free Vbucks, invite", "online");
+                        client.setStatus("Free Chat GPT 4, invite", "online");
                     } catch (owen) {
                         console.log(`Error: ${owen}`);
                     }
